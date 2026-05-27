@@ -36,7 +36,7 @@ namespace svg
     }
     void Polyline::draw(PNGImage &img) const
     {
-        int count=0;
+        size_t count=0;
         while (count+1<points.size()) {
             img.draw_line(points[count], points[count+1], stroke);
             count++;
