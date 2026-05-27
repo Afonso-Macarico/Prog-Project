@@ -62,7 +62,7 @@ namespace svg
     class Line : public SVGElement
     {
     public:
-        Line(const Color &stroke, const Point &start);
+        Line(const Color &stroke, const Point &start, const Point &end);
         void draw(PNGImage &img) const override;
 
     private:
