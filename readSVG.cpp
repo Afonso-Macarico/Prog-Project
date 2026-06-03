@@ -70,7 +70,20 @@ namespace svg
         parse_transform(child, origin, transform_type, transform_args);
         string name = child->Name();
 
-        if (name == "ellipse")
+        if (name == "g")
+        {
+            vector<SVGElement *> children;
+            for (XMLElement *c = child->FirstChildElement();
+                 c != nullptr;
+                 c = c->NextSiblingElement())
+            {
+                SVGElement *e = parse_element(c);
+                if (e != nullptr)
+                    children.push_back(e);
+            }
+            return new Group(children);
+        }
+        else if (name == "ellipse")
         {
             Color fill = parse_color(child->Attribute("fill"));
             Point center = {child->IntAttribute("cx"), child->IntAttribute("cy")};

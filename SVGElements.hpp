@@ -94,6 +94,16 @@ namespace svg
     };
 
 
+    class Group : public SVGElement
+    {
+    public:
+        Group(const std::vector<SVGElement *> &elements);
+        ~Group() override;
+        void draw(PNGImage &img) const override;
+
+    private:
+        std::vector<SVGElement *> elements;
+    };
 
 }
 #endif

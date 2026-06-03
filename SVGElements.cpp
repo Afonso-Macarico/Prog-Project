@@ -67,4 +67,18 @@ namespace svg
         img.draw_polygon(ps, fill);
     }
 
+    Group::Group(const std::vector<SVGElement *> &elements) : elements(elements) {}
+
+    Group::~Group()
+    {
+        for (SVGElement *e : elements)
+            delete e;
+    }
+
+    void Group::draw(PNGImage &img) const
+    {
+        for (SVGElement *e : elements)
+            e->draw(img);
+    }
+
 }
