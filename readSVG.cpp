@@ -76,6 +76,17 @@ namespace svg
             elem = new Line(stroke, start, end);
         }
 
+        else if (name == "g")
+        {
+            vector<SVGElement*> children;
+            for (XMLElement *gc = child->FirstChildElement(); gc; gc = gc->NextSiblingElement())
+            {
+                SVGElement *e = parse_element(gc, id_map);
+                if (e != nullptr) children.push_back(e);
+            }
+            elem = new Group(children);
+        }
+
         else if (name == "use"){
             string href = child->Attribute("href");
             string id =href.substr(1);

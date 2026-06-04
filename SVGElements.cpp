@@ -1,4 +1,5 @@
 #include "SVGElements.hpp"
+#include <vector>
 
 namespace svg
 {
@@ -124,6 +125,23 @@ namespace svg
             p = p.scale(origin, v);
         }
     }
+    Group::Group(const std::vector<SVGElement*> &elements) : elements(elements) {}
+
+    Group::~Group() { for (SVGElement *e : elements) delete e; }
+
+    void Group::draw(PNGImage &img) const { for (SVGElement *e : elements) e->draw(img); }
+
+    SVGElement *Group::clone() const {
+        std::vector<SVGElement*> copies;
+        for (SVGElement *e : elements) copies.push_back(e->clone());
+        return new Group(copies);
+    }
+
+    void Group::translate(const Point &t) { for (SVGElement *e : elements) e->translate(t); }
+
+    void Group::rotate(const Point &origin, int deg) { for (SVGElement *e : elements) e->rotate(origin, deg); }
+
+    void Group::scale(const Point &origin, int v) { for (SVGElement *e : elements) e->scale(origin, v); }
 
     SVGElement* Ellipse::clone() const {return new Ellipse(*this);}
     SVGElement* Circle::clone() const {return new Circle(*this);}

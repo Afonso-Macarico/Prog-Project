@@ -112,6 +112,19 @@ namespace svg
         SVGElement* clone() const override;
 
     };
+    class Group : public SVGElement
+    {
+    public:
+            Group(const std::vector<SVGElement*> &elements);
+            ~Group();
+            void draw(PNGImage &img) const override;
+            SVGElement *clone() const override;
+            void translate(const Point &t) override;
+            void rotate(const Point &origin, int degrees) override;
+            void scale(const Point &origin, int v) override;
+        private:
+            std::vector<SVGElement*> elements;
+    };
 
 
 
