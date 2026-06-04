@@ -125,4 +125,11 @@ namespace svg
         }
     }
 
+    SVGElement* Ellipse::clone() const {return new Ellipse(*this);}
+    SVGElement* Circle::clone() const {return new Circle(*this);}
+    SVGElement* Polyline::clone() const {return new Polyline(*this);}
+    SVGElement* Line::clone() const {return new Line(*this);}
+    SVGElement* Polygon::clone() const {return new Polygon(*this);}
+    SVGElement* Rect::clone() const {return new Rect(*this);}
+
 }

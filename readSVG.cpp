@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <map>
 #include "SVGElements.hpp"
 #include "external/tinyxml2/tinyxml2.h"
 
@@ -26,9 +27,10 @@ namespace svg
         return pts;
     }
 
+
     // Helper: parse one SVG child element and return a new SVGElement* (or nullptr if unknown)
-    static SVGElement *parse_element(XMLElement *child)
-    {
+    static SVGElement *parse_element(XMLElement *child, map<string, SVGElement*>& id_map )
+    { 
         string name = child->Name();
         SVGElement* elem = nullptr;
 
@@ -74,7 +76,19 @@ namespace svg
             elem = new Line(stroke, start, end);
         }
 
+        else if (name == "use"){
+            string href = child->Attribute("href");
+            string id =href.substr(1);
+            elem = id_map[id]->clone();
+        }
+
         if (elem != nullptr){
+
+
+            const char* id = child->Attribute("id");
+                if (id != nullptr){
+                    id_map[id]=elem;
+                }
 
             Point origin = {0, 0};
             const char* origin_at = child->Attribute("transform-origin");
@@ -111,6 +125,7 @@ namespace svg
 
     void readSVG(const string &svg_file, Point &dimensions, vector<SVGElement *> &svg_elements)
     {
+        map<string, SVGElement*> id_map;
         XMLDocument doc;
         XMLError r = doc.LoadFile(svg_file.c_str());
         if (r != XML_SUCCESS)
@@ -126,7 +141,7 @@ namespace svg
              child != nullptr;
              child = child->NextSiblingElement())
         {
-            SVGElement *elem = parse_element(child);
+            SVGElement *elem = parse_element(child,id_map);
             if (elem != nullptr)
             {
                 svg_elements.push_back(elem);

@@ -18,6 +18,7 @@ namespace svg
         virtual void translate(const Point& t) =0;
         virtual void rotate(const Point& origin, int degrees) =0;
         virtual void scale(const Point& origin, int v)=0;
+        virtual SVGElement* clone() const = 0;
     };
 
     // Declaration of namespace functions
@@ -38,6 +39,7 @@ namespace svg
         void translate(const Point& t) override;
         void rotate(const Point& origin, int degrees) override;
         void scale(const Point& origin, int v) override;
+        SVGElement* clone() const override;
 
     private:
         Color fill;
@@ -52,6 +54,7 @@ namespace svg
         void translate(const Point& t) override;
         void rotate(const Point& origin, int degrees) override;
         void scale(const Point& origin, int v) override;
+        SVGElement* clone() const override;
 
     private:
         Color fill;
@@ -66,6 +69,7 @@ namespace svg
         void translate(const Point& t) override;
         void rotate(const Point& origin, int degrees) override;
         void scale(const Point& origin, int v) override;
+        SVGElement* clone() const override;
 
     private:
         Color stroke;
@@ -79,6 +83,7 @@ namespace svg
         void translate(const Point& t) override;
         void rotate(const Point& origin, int degrees) override;
         void scale(const Point& origin, int v) override;
+        SVGElement* clone() const override;
 
     private:
         Color stroke;
@@ -93,6 +98,7 @@ namespace svg
         void translate(const Point& t) override;
         void rotate(const Point& origin, int degrees) override;
         void scale(const Point& origin, int v) override;
+        SVGElement* clone() const override;
 
 
     private:
@@ -103,6 +109,7 @@ namespace svg
     {
     public:
         Rect(const Color &fill, const int &width, const int &height, const Point &corner);
+        SVGElement* clone() const override;
 
     };
 
