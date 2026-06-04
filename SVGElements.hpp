@@ -99,21 +99,11 @@ namespace svg
         Color fill;
         std::vector<Point> points;
     };
-    class Rect : public SVGElement
+    class Rect : public Polygon
     {
     public:
         Rect(const Color &fill, const int &width, const int &height, const Point &corner);
-        void draw(PNGImage &img) const override;
-        void translate(const Point& t) override;
-        void rotate(const Point& origin, int degrees) override;
-        void scale(const Point& origin, int v) override;
 
-
-    private:
-        Color fill;
-        int width;
-        int height;
-        Point corner;
     };
 
 

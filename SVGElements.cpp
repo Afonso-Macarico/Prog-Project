@@ -21,7 +21,12 @@ namespace svg
 
     Polygon::Polygon(const Color &fill, const std::vector<Point> &points) : fill(fill), points(points) {}
 
-    Rect::Rect(const Color &fill, const int &width, const int &height, const Point &corner) : fill(fill), width(width), height(height), corner(corner) {}
+    Rect::Rect(const Color &fill, const int &width, const int &height, const Point &corner) : Polygon(fill,{
+        corner,
+        {corner.x + width-1, corner.y},
+        {corner.x + width-1, corner.y+height-1},
+        {corner.x, corner.y+height-1}
+    }) {}
 
     void Ellipse::draw(PNGImage &img) const
     {
@@ -51,21 +56,6 @@ namespace svg
         img.draw_polygon(points, fill);
     }
 
-    void Rect::draw(PNGImage &img) const {
-        Point up_r_corner, down_r_corner, down_l_corner;
-        up_r_corner.x= corner.x + width;
-        up_r_corner.y= corner.y;
-        down_r_corner.x = corner.x +width;
-        down_r_corner.y=corner.y + height;
-        down_l_corner.x = corner.x;
-        down_l_corner.y = corner.y + height;
-        std::vector<Point> ps;
-        ps.push_back(corner);
-        ps.push_back(up_r_corner);
-        ps.push_back(down_r_corner);
-        ps.push_back(down_l_corner);
-        img.draw_polygon(ps, fill);
-    }
 
     void Ellipse::translate(const Point& t){
         center = center.translate(t);
@@ -133,18 +123,6 @@ namespace svg
         for (Point& p : points){
             p = p.scale(origin, v);
         }
-    }
-
-    void Rect::translate(const Point& t){
-        corner = corner.translate(t);
-    }
-    void Rect::rotate(const Point& origin, int degrees){
-        corner = corner.rotate(origin, degrees);
-    }
-    void Rect::scale(const Point& origin, int v){
-        corner = corner.scale(origin, v);
-        height = height*v;
-        width *=v;
     }
 
 }

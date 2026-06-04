@@ -86,7 +86,9 @@ namespace svg
             if (transform_at) {
                 if (strncmp(transform_at,"translate",9)==0){
                     Point t;
-                    sscanf(transform_at, "translate(%d %d)", &t.x, &t.y);
+                    if (sscanf(transform_at, "translate(%d %d)", &t.x, &t.y) != 2){
+                        sscanf(transform_at, "translate(%d,%d)", &t.x, &t.y);
+                    };
                     elem ->translate(t);
                 }
 
