@@ -1,0 +1,12 @@
+>>>> [1] rotate_circle <<<<
+>>>> [2] rotate_circle_with_origin <<<<
+>>>> [3] rotate_line <<<<
+>>>> [4] rotate_line_with_origin <<<<
+>>>> [5] rotate_polygon <<<<
+>>>> [6] rotate_polygon_with_origin <<<<
+>>>> [7] rotate_polyline <<<<
+>>>> [8] rotate_polyline_with_origin <<<<
+>>>> [9] rotate_rect <<<<
+pixel (6 252): expected 0 0 255 got 255 255 255
+>>>> [10] rotate_rect_with_origin <<<<
+test: PNGImage.cpp:62: svg::Color& svg::PNGImage::at(int, int): Assertion `x >= 0 && x < width_' failed.

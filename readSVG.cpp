@@ -30,26 +30,27 @@ namespace svg
     static SVGElement *parse_element(XMLElement *child)
     {
         string name = child->Name();
+        SVGElement* elem = nullptr;
 
         if (name == "ellipse")
         {
             Color fill = parse_color(child->Attribute("fill"));
             Point center = {child->IntAttribute("cx"), child->IntAttribute("cy")};
             Point radius = {child->IntAttribute("rx"), child->IntAttribute("ry")};
-            return new Ellipse(fill, center, radius);
+            elem = new Ellipse(fill, center, radius);
         }
         else if (name == "circle")
         {
             Color fill = parse_color(child->Attribute("fill"));
             Point center = {child->IntAttribute("cx"), child->IntAttribute("cy")};
             int r = child->IntAttribute("r");
-            return new Circle(fill, center, r);
+            elem= new Circle(fill, center, r);
         }
         else if (name == "polygon")
         {
             Color fill = parse_color(child->Attribute("fill"));
             vector<Point> pts = parse_points(child->Attribute("points"));
-            return new Polygon(fill, pts);
+            elem = new Polygon(fill, pts);
         }
         else if (name == "rect")
         {
@@ -57,23 +58,53 @@ namespace svg
             Point corner = {child->IntAttribute("x"), child->IntAttribute("y")};
             int w = child->IntAttribute("width");
             int h = child->IntAttribute("height");
-            return new Rect(fill, w, h, corner);
+            elem = new Rect(fill, w, h, corner);
         }
         else if (name == "polyline")
         {
             Color stroke = parse_color(child->Attribute("stroke"));
             vector<Point> pts = parse_points(child->Attribute("points"));
-            return new Polyline(stroke, pts);
+            elem = new Polyline(stroke, pts);
         }
         else if (name == "line")
         {
             Color stroke = parse_color(child->Attribute("stroke"));
             Point start = {child->IntAttribute("x1"), child->IntAttribute("y1")};
             Point end   = {child->IntAttribute("x2"), child->IntAttribute("y2")};
-            return new Line(stroke, start, end);
+            elem = new Line(stroke, start, end);
         }
 
-        return nullptr; // unknown element
+        if (elem != nullptr){
+
+            Point origin = {0, 0};
+            const char* origin_at = child->Attribute("transform-origin");
+            if (origin_at) {
+                sscanf(origin_at, "%d %d", &origin.x, &origin.y);
+            }
+
+            const char* transform_at = child->Attribute("transform");
+            if (transform_at) {
+                if (strncmp(transform_at,"translate",9)==0){
+                    Point t;
+                    sscanf(transform_at, "translate(%d %d)", &t.x, &t.y);
+                    elem ->translate(t);
+                }
+
+                if (strncmp(transform_at,"rotate",6)==0){
+                    int deg;
+                    sscanf(transform_at, "rotate(%d)", &deg);
+                    elem ->rotate(origin, deg);
+                }
+            
+                if (strncmp(transform_at,"scale",5)==0){
+                    int scale;
+                    sscanf(transform_at, "scale(%d)", &scale);
+                    elem ->scale(origin, scale);
+                }
+            }
+        }
+
+        return elem;
     }
 
     void readSVG(const string &svg_file, Point &dimensions, vector<SVGElement *> &svg_elements)

@@ -67,4 +67,84 @@ namespace svg
         img.draw_polygon(ps, fill);
     }
 
+    void Ellipse::translate(const Point& t){
+        center = center.translate(t);
+    }
+    void Ellipse::rotate(const Point& origin, int degrees){
+        center = center.rotate(origin, degrees);
+    }
+    void Ellipse::scale(const Point& origin, int v){
+        center = center.scale(origin, v);
+        radius = radius.scale({0,0}, v);
+
+    }
+
+    void Circle::translate(const Point& t){
+        center = center.translate(t);
+    }
+    void Circle::rotate(const Point& origin, int degrees){
+        center = center.rotate(origin, degrees);
+    }
+    void Circle::scale(const Point& origin, int v){
+        center = center.scale(origin, v);
+        radius = radius*v;
+    }
+
+    void Polyline::translate(const Point& t){
+        for (Point& p : points){
+            p = p.translate(t);
+        }
+    }
+    void Polyline::rotate(const Point& origin, int degrees){
+        for (Point& p : points){
+            p = p.rotate(origin, degrees);
+        }
+    }
+    void Polyline::scale(const Point& origin, int v){
+        for (Point& p : points){
+            p = p.scale(origin, v);
+        }
+    }
+
+    void Line::translate(const Point& t){
+        start = start.translate(t);
+        end = end.translate(t);
+    }
+    void Line::rotate(const Point& origin, int degrees){
+        start = start.rotate(origin, degrees);
+        end = end.rotate(origin, degrees);
+    }
+    void Line::scale(const Point& origin, int v){
+        start = start.scale(origin, v);
+        end = end.scale(origin, v);
+    }
+
+    void Polygon::translate(const Point& t){
+        for (Point& p : points){
+            p = p.translate(t);
+        }
+    }
+    void Polygon::rotate(const Point& origin, int degrees){
+            for (Point& p : points){
+            p = p.rotate(origin, degrees);
+        }
+    }
+    void Polygon::scale(const Point& origin, int v){
+        for (Point& p : points){
+            p = p.scale(origin, v);
+        }
+    }
+
+    void Rect::translate(const Point& t){
+        corner = corner.translate(t);
+    }
+    void Rect::rotate(const Point& origin, int degrees){
+        corner = corner.rotate(origin, degrees);
+    }
+    void Rect::scale(const Point& origin, int v){
+        corner = corner.scale(origin, v);
+        height = height*v;
+        width *=v;
+    }
+
 }
