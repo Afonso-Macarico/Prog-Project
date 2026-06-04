@@ -5,13 +5,13 @@
 
 Identify all group elements (numbers and names).
 
-- upXXXXX Name of element 1
-- upXXXXX Name of element 2
+- up202403501 Afonso da Silva Berti Maçarico
+- up202403505 Mateus Tomé Dinis Francisco
 - upXXXXX Name of element 3
 
 
 ## Accomplished tasks
 
-Brief summary of what you implemented.
+We were able to implement everything in the guide.
 
 
