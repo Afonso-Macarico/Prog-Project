@@ -1,50 +1,61 @@
->>>> [1] use_1 <<<<
->>>> [2] use_2 <<<<
->>>> [3] use_3 <<<<
-readSVG.cpp:82:37: runtime error: member call on null pointer of type 'struct SVGElement'
-readSVG.cpp:82:37: runtime error: member access within null pointer of type 'struct SVGElement'
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==35145==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x5eca1ff1ac54 bp 0x7fff32774e00 sp 0x7fff32774710 T0)
-==35145==The signal is caused by a READ memory access.
-==35145==Hint: address points to the zero page.
-    #0 0x5eca1ff1ac54 in parse_element /home/lucie/prog2/Prog-Project/readSVG.cpp:82
-    #1 0x5eca1ff1ccf9 in svg::readSVG(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, svg::Point&, std::vector<svg::SVGElement*, std::allocator<svg::SVGElement*> >&) /home/lucie/prog2/Prog-Project/readSVG.cpp:144
-    #2 0x5eca1ff0378a in svg::convert(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /home/lucie/prog2/Prog-Project/convert.cpp:11
-    #3 0x5eca1fea45a7 in svg::TestDriver::run_conversion_test(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/home/lucie/prog2/Prog-Project/test+0x1595a7) (BuildId: ef712b42f9f07304e18c3c2bcdd3255fb752e55d)
-    #4 0x5eca1fea675d in svg::TestDriver::run_test(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/home/lucie/prog2/Prog-Project/test+0x15b75d) (BuildId: ef712b42f9f07304e18c3c2bcdd3255fb752e55d)
-    #5 0x5eca1fea7e36 in svg::TestDriver::run_tests(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/home/lucie/prog2/Prog-Project/test+0x15ce36) (BuildId: ef712b42f9f07304e18c3c2bcdd3255fb752e55d)
-    #6 0x5eca1fea3759 in main /home/lucie/prog2/Prog-Project/test.cpp:181
-    #7 0x7db52e42a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-    #8 0x7db52e42a28a in __libc_start_main_impl ../csu/libc-start.c:360
-    #9 0x5eca1fea3314 in _start (/home/lucie/prog2/Prog-Project/test+0x158314) (BuildId: ef712b42f9f07304e18c3c2bcdd3255fb752e55d)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV /home/lucie/prog2/Prog-Project/readSVG.cpp:82 in parse_element
-==35145==ABORTING
->>>> [4] use_4 <<<<
-readSVG.cpp:82:37: runtime error: member call on null pointer of type 'struct SVGElement'
-readSVG.cpp:82:37: runtime error: member access within null pointer of type 'struct SVGElement'
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==35146==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x5eca1ff1ac54 bp 0x7fff32774e00 sp 0x7fff32774710 T0)
-==35146==The signal is caused by a READ memory access.
-==35146==Hint: address points to the zero page.
-    #0 0x5eca1ff1ac54 in parse_element /home/lucie/prog2/Prog-Project/readSVG.cpp:82
-    #1 0x5eca1ff1ccf9 in svg::readSVG(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, svg::Point&, std::vector<svg::SVGElement*, std::allocator<svg::SVGElement*> >&) /home/lucie/prog2/Prog-Project/readSVG.cpp:144
-    #2 0x5eca1ff0378a in svg::convert(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /home/lucie/prog2/Prog-Project/convert.cpp:11
-    #3 0x5eca1fea45a7 in svg::TestDriver::run_conversion_test(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/home/lucie/prog2/Prog-Project/test+0x1595a7) (BuildId: ef712b42f9f07304e18c3c2bcdd3255fb752e55d)
-    #4 0x5eca1fea675d in svg::TestDriver::run_test(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/home/lucie/prog2/Prog-Project/test+0x15b75d) (BuildId: ef712b42f9f07304e18c3c2bcdd3255fb752e55d)
-    #5 0x5eca1fea7e36 in svg::TestDriver::run_tests(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/home/lucie/prog2/Prog-Project/test+0x15ce36) (BuildId: ef712b42f9f07304e18c3c2bcdd3255fb752e55d)
-    #6 0x5eca1fea3759 in main /home/lucie/prog2/Prog-Project/test.cpp:181
-    #7 0x7db52e42a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-    #8 0x7db52e42a28a in __libc_start_main_impl ../csu/libc-start.c:360
-    #9 0x5eca1fea3314 in _start (/home/lucie/prog2/Prog-Project/test+0x158314) (BuildId: ef712b42f9f07304e18c3c2bcdd3255fb752e55d)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV /home/lucie/prog2/Prog-Project/readSVG.cpp:82 in parse_element
-==35146==ABORTING
->>>> [5] use_5 <<<<
-pixel (51 51): expected 0 255 0 got 255 255 255
->>>> [6] use_6 <<<<
-pixel (0 0): expected 0 0 0 got 255 255 255
+>>>> [1] batman <<<<
+>>>> [2] batman_2 <<<<
+>>>> [3] blank_1 <<<<
+>>>> [4] blank_2 <<<<
+>>>> [5] circle_1 <<<<
+>>>> [6] circle_2 <<<<
+>>>> [7] ellipse_1 <<<<
+>>>> [8] ellipse_2 <<<<
+>>>> [9] group_1 <<<<
+>>>> [10] group_2 <<<<
+>>>> [11] group_3 <<<<
+>>>> [12] group_4 <<<<
+>>>> [13] group_5 <<<<
+>>>> [14] group_6 <<<<
+>>>> [15] group_7 <<<<
+>>>> [16] line_1 <<<<
+>>>> [17] line_2 <<<<
+>>>> [18] lion <<<<
+>>>> [19] polygon_1 <<<<
+>>>> [20] polygon_2 <<<<
+>>>> [21] polyline_1 <<<<
+>>>> [22] polyline_2 <<<<
+>>>> [23] polyline_3 <<<<
+>>>> [24] rect_1 <<<<
+>>>> [25] rect_2 <<<<
+>>>> [26] rect_3 <<<<
+>>>> [27] rotate_circle <<<<
+>>>> [28] rotate_circle_with_origin <<<<
+>>>> [29] rotate_line <<<<
+>>>> [30] rotate_line_with_origin <<<<
+>>>> [31] rotate_polygon <<<<
+>>>> [32] rotate_polygon_with_origin <<<<
+>>>> [33] rotate_polyline <<<<
+>>>> [34] rotate_polyline_with_origin <<<<
+>>>> [35] rotate_rect <<<<
+>>>> [36] rotate_rect_with_origin <<<<
+>>>> [37] scale_circle <<<<
+>>>> [38] scale_circle_with_origin <<<<
+>>>> [39] scale_ellipse <<<<
+>>>> [40] scale_ellipse_with_origin <<<<
+>>>> [41] scale_line <<<<
+>>>> [42] scale_line_with_origin <<<<
+>>>> [43] scale_polygon <<<<
+>>>> [44] scale_polygon_with_origin <<<<
+>>>> [45] scale_polyline <<<<
+>>>> [46] scale_polyline_with_origin <<<<
+>>>> [47] scale_rect <<<<
+>>>> [48] scale_rect_with_origin <<<<
+>>>> [49] transform_several <<<<
+>>>> [50] translate_circle <<<<
+>>>> [51] translate_ellipse <<<<
+>>>> [52] translate_line <<<<
+>>>> [53] translate_polygon <<<<
+>>>> [54] translate_polyline <<<<
+>>>> [55] translate_rect <<<<
+>>>> [56] use_1 <<<<
+>>>> [57] use_2 <<<<
+>>>> [58] use_3 <<<<
+>>>> [59] use_4 <<<<
+>>>> [60] use_5 <<<<
+>>>> [61] use_6 <<<<

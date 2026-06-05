@@ -12,13 +12,14 @@ namespace svg
                      const Point &center,
                      const Point &radius)
         : fill(fill), center(center), radius(radius)
-    {
-    }
-    Circle::Circle(const Color &fill, const Point &center, const int &radius) : fill(fill), center(center), radius(radius) {}
+    {}
+
+
+    Circle::Circle(const Color &fill, const Point &center, const int &radius) : Ellipse(fill,center, {radius, radius}){}
 
     Polyline::Polyline(const Color &stroke, const std::vector<Point> &points) : stroke(stroke), points(points) {}
 
-    Line::Line(const Color &stroke, const Point &start, const Point &end) : stroke(stroke), start(start), end(end) {}
+    Line::Line(const Color &stroke, const Point &start, const Point &end) : Polyline(stroke,{start, end}){}
 
     Polygon::Polygon(const Color &fill, const std::vector<Point> &points) : fill(fill), points(points) {}
 
@@ -33,13 +34,7 @@ namespace svg
     {
         img.draw_ellipse(center, radius, fill);
     }
-    void Circle::draw(PNGImage &img) const
-    {
-        Point raio;
-        raio.x=radius;
-        raio.y=radius;
-        img.draw_ellipse(center, raio, fill);
-    }
+
     void Polyline::draw(PNGImage &img) const
     {
         size_t count=0;
@@ -49,14 +44,9 @@ namespace svg
         }
     }
 
-    void Line::draw(PNGImage &img) const {
-        img.draw_line(start, end, stroke);
-    }
-
     void Polygon::draw(PNGImage &img) const {
         img.draw_polygon(points, fill);
     }
-
 
     void Ellipse::translate(const Point& t){
         center = center.translate(t);
@@ -68,17 +58,6 @@ namespace svg
         center = center.scale(origin, v);
         radius = radius.scale({0,0}, v);
 
-    }
-
-    void Circle::translate(const Point& t){
-        center = center.translate(t);
-    }
-    void Circle::rotate(const Point& origin, int degrees){
-        center = center.rotate(origin, degrees);
-    }
-    void Circle::scale(const Point& origin, int v){
-        center = center.scale(origin, v);
-        radius = radius*v;
     }
 
     void Polyline::translate(const Point& t){
@@ -95,19 +74,6 @@ namespace svg
         for (Point& p : points){
             p = p.scale(origin, v);
         }
-    }
-
-    void Line::translate(const Point& t){
-        start = start.translate(t);
-        end = end.translate(t);
-    }
-    void Line::rotate(const Point& origin, int degrees){
-        start = start.rotate(origin, degrees);
-        end = end.rotate(origin, degrees);
-    }
-    void Line::scale(const Point& origin, int v){
-        start = start.scale(origin, v);
-        end = end.scale(origin, v);
     }
 
     void Polygon::translate(const Point& t){

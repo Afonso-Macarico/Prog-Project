@@ -46,21 +46,13 @@ namespace svg
         Point center;
         Point radius;
     };
-    class Circle : public SVGElement
+    class Circle : public Ellipse
     {
     public:
         Circle(const Color &fill, const Point &center, const int &radius);
-        void draw(PNGImage &img) const override;
-        void translate(const Point& t) override;
-        void rotate(const Point& origin, int degrees) override;
-        void scale(const Point& origin, int v) override;
         SVGElement* clone() const override;
-
-    private:
-        Color fill;
-        Point center;
-        int radius;
     };
+
     class Polyline : public SVGElement
     {
     public:
@@ -75,21 +67,14 @@ namespace svg
         Color stroke;
         std::vector<Point> points;
     };
-    class Line : public SVGElement
+    
+    class Line : public Polyline
     {
     public:
         Line(const Color &stroke, const Point &start, const Point &end);
-        void draw(PNGImage &img) const override;
-        void translate(const Point& t) override;
-        void rotate(const Point& origin, int degrees) override;
-        void scale(const Point& origin, int v) override;
         SVGElement* clone() const override;
-
-    private:
-        Color stroke;
-        Point start;
-        Point end;
     };
+    
     class Polygon : public SVGElement
     {
     public:
