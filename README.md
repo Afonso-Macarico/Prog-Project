@@ -7,7 +7,7 @@ Identify all group elements (numbers and names).
 
 - up202403501 Afonso da Silva Berti Maçarico
 - up202403505 Mateus Tomé Dinis Francisco
-- upXXXXX Name of element 3
+- up202512623 Lucie Maslowska
 
 
 ## Accomplished tasks

@@ -14,6 +14,7 @@ namespace svg
         : fill(fill), center(center), radius(radius)
     {}
 
+    //Constructors
 
     Circle::Circle(const Color &fill, const Point &center, const int &radius) : Ellipse(fill,center, {radius, radius}){}
 
@@ -23,20 +24,13 @@ namespace svg
 
     Polygon::Polygon(const Color &fill, const std::vector<Point> &points) : fill(fill), points(points) {}
 
-    Rect::Rect(const Color &fill, const int &width, const int &height, const Point &corner) : Polygon(fill,{
-        corner,
-        {corner.x + width-1, corner.y},
-        {corner.x + width-1, corner.y+height-1},
-        {corner.x, corner.y+height-1}
-    }) {}
+    Rect::Rect(const Color &fill, const int &width, const int &height, const Point &corner) : Polygon(fill,{corner,{corner.x + width-1, corner.y},{corner.x + width-1, corner.y+height-1},{corner.x, corner.y+height-1}}) {}
 
-    void Ellipse::draw(PNGImage &img) const
-    {
-        img.draw_ellipse(center, radius, fill);
-    }
+    //Draw methods
 
-    void Polyline::draw(PNGImage &img) const
-    {
+    void Ellipse::draw(PNGImage &img) const{ img.draw_ellipse(center, radius, fill);}
+
+    void Polyline::draw(PNGImage &img) const{
         size_t count=0;
         while (count+1<points.size()) {
             img.draw_line(points[count], points[count+1], stroke);
@@ -44,9 +38,9 @@ namespace svg
         }
     }
 
-    void Polygon::draw(PNGImage &img) const {
-        img.draw_polygon(points, fill);
-    }
+    void Polygon::draw(PNGImage &img) const { img.draw_polygon(points, fill);}
+
+    //transformations
 
     void Ellipse::translate(const Point& t){
         center = center.translate(t);
@@ -91,6 +85,9 @@ namespace svg
             p = p.scale(origin, v);
         }
     }
+
+    //group
+
     Group::Group(const std::vector<SVGElement*> &elements) : elements(elements) {}
 
     Group::~Group() { for (SVGElement *e : elements) delete e; }
@@ -109,6 +106,7 @@ namespace svg
 
     void Group::scale(const Point &origin, int v) { for (SVGElement *e : elements) e->scale(origin, v); }
 
+    //clones
     SVGElement* Ellipse::clone() const {return new Ellipse(*this);}
     SVGElement* Circle::clone() const {return new Circle(*this);}
     SVGElement* Polyline::clone() const {return new Polyline(*this);}

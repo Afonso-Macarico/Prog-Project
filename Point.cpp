@@ -23,8 +23,7 @@ namespace svg
 
     Point Point::scale(const Point &origin, int v) const
     {
-        return {origin.x + (x - origin.x) * v,
-                origin.y + (y - origin.y) * v};
+        return {origin.x + (x - origin.x) * v,origin.y + (y - origin.y) * v};
     }
 
 }

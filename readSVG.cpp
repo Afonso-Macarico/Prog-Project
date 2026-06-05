@@ -9,8 +9,7 @@ using namespace tinyxml2;
 
 namespace svg
 {
-    // Helper: parse a "points" attribute string into a vector of Points
-    // Format: "x1,y1 x2,y2 x3,y3 ..."
+    /// parse "Points" in text to real points
     static vector<Point> parse_points(const string &pts_str)
     {
         vector<Point> pts;
@@ -18,7 +17,6 @@ namespace svg
         string token;
         while (ss >> token)
         {
-            // token is "x,y"
             size_t comma = token.find(',');
             int x = stoi(token.substr(0, comma));
             int y = stoi(token.substr(comma + 1));
@@ -28,7 +26,7 @@ namespace svg
     }
 
 
-    // Helper: parse one SVG child element and return a new SVGElement* (or nullptr if unknown)
+    //parse one SVG child element and return a new SVGElement* (or nullptr if unknown)
     static SVGElement *parse_element(XMLElement *child, map<string, SVGElement*>& id_map )
     { 
         string name = child->Name();
@@ -100,6 +98,8 @@ namespace svg
                 if (id != nullptr){
                     id_map[id]=elem;
                 }
+
+            //handle transformation
 
             Point origin = {0, 0};
             const char* origin_at = child->Attribute("transform-origin");
